@@ -1,22 +1,5 @@
 import styles from "./Home.module.css"
 
-// const linkBase:string ="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
-
-// interface Pokemon {
-//   name: string;
-//   number: number;
-//   imgLink: string;
-// }
-
-// let Carapuce:Pokemon = { name:"Carapuce", number:7, imgLink:linkBase};
-// Carapuce.imgLink+= Carapuce.number + ".png"
-
-// <div>
-//   <img src=${Carapuce.imgLink} alt="Carapuce" />
-//   <p>Name: ${Carapuce.name}</p>
-//   <p>Number: ${Carapuce.number}</p>
-// </div>
-
 export const Home = () => {
   return (
     <div className={styles.intro}>
