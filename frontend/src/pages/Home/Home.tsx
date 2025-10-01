@@ -7,10 +7,9 @@ function filterPokemonByName(pokeList: PokemonInfo[], filterValue: string) {
   return pokeList.filter(pokemon => pokemon.name.toLowerCase().includes(filterValue.toLowerCase()))
 }
 
-function fetchPokemons() {
-  return fetch("http://localhost:8000/pokemons", { headers: { accept: "application/json" } }).then(response =>
-    response.json(),
-  )
+async function fetchPokemons() {
+  const response = await fetch("http://localhost:8000/pokemons", { headers: { accept: "application/json" } })
+  return response.json()
 }
 
 export const Home = () => {
@@ -18,9 +17,11 @@ export const Home = () => {
   const [pokemonList, updatePokemonList] = React.useState<PokemonInfo[]>([])
 
   React.useEffect(() => {
-    fetchPokemons().then(data => {
-      updatePokemonList(data)
-    })
+    const update = async () => {
+      const pokemons = await fetchPokemons()
+      updatePokemonList(pokemons)
+    }
+    update()
   }, [])
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
