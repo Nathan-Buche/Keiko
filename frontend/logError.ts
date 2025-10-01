@@ -8,10 +8,10 @@ interface CustomError {
 }
 
 function logError(error: CustomError) {
-  console.log(`There was an error: code ${error.code} !!`)
+  console.error(`There was an error: code ${error.code} !!`)
 
-  console.log(`File: ${error.details.file}`)
-  console.log(`Error Message: ${error.details.message}`)
+  console.error(`File: ${error.details.file}`)
+  console.error(`Error Message: ${error.details.message}`)
 }
 
 logError({
