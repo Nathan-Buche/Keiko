@@ -3,8 +3,8 @@ import { Pokemon } from "../../components/Pokemon"
 import React from "react"
 import type { PokemonInfo } from "../../components/Pokemon"
 
-function filterPokemonByName(pokeList: PokemonInfo[], filterValue: string) {
-  return pokeList.filter(pokemon => pokemon.name.toLowerCase().includes(filterValue.toLowerCase()))
+function filterPokemonByName(pokeList: PokemonInfo[], name: string) {
+  return pokeList.filter(pokemon => name.length == 0 || pokemon.name.toLowerCase().includes(name.toLowerCase()))
 }
 
 function fetchPokemons() {
@@ -35,9 +35,11 @@ export const Home = () => {
         value={pokemonFilterValue}
         placeholder="Cherchez un pokémon"
       />
-      {filterPokemonByName(pokemonList, pokemonFilterValue).map(({ name, id, height, weight }) => (
-        <Pokemon key={id} id={id} name={name} height={height} weight={weight} />
-      ))}
+      {(pokemonFilterValue != "" ? filterPokemonByName(pokemonList, pokemonFilterValue) : pokemonList).map(
+        ({ name, id, height, weight }) => (
+          <Pokemon key={id} id={id} name={name} height={height} weight={weight} />
+        ),
+      )}
     </div>
   )
 }
