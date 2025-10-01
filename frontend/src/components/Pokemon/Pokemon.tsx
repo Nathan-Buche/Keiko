@@ -4,6 +4,7 @@ interface Props {
 }
 
 export const Pokemon = ({ name, id }: Props) => {
+  console.log("Rendering Pokemon:", name)
   return (
     <div>
       <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt={name} />
