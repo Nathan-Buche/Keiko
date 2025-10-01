@@ -8,10 +8,10 @@ function filterPokemonByName(pokeList: PokemonInfo[], name: string) {
   return pokeList.filter(pokemon => pokemon.name.toLowerCase().includes(name.toLowerCase()))
 }
 
-function fetchPokemons() {
-  return fetch("http://localhost:8000/pokemons", { headers: { accept: "application/json" } }).then(response =>
-    response.json(),
-  )
+async function fetchPokemons() {
+  const response = await fetch("http://localhost:8000/pokemons", { headers: { accept: "application/json" } })
+  const pokemons = await response.json()
+  return pokemons
 }
 
 export const Home = () => {
@@ -19,9 +19,11 @@ export const Home = () => {
   const [pokemonList, updatePokemonList] = React.useState<PokemonInfo[]>([])
 
   React.useEffect(() => {
-    fetchPokemons().then(data => {
-      updatePokemonList(data)
-    })
+    const update = async () => {
+      const pokemons = await fetchPokemons()
+      updatePokemonList(pokemons)
+    }
+    update()
   }, [])
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,9 +39,11 @@ export const Home = () => {
         value={pokemonFilterValue}
         placeholder="Cherchez un pokémon"
       />
-      {filterPokemonByName(pokemonList, pokemonFilterValue).map(({ name, id, height, weight }) => (
-        <Pokemon key={id} id={id} name={name} height={height} weight={weight} />
-      ))}
+      <div className={styles.pokemonContainer}>
+        {filterPokemonByName(pokemonList, pokemonFilterValue).map(({ name, id, height, weight }) => (
+          <Pokemon key={id} id={id} name={name} height={height} weight={weight} />
+        ))}
+      </div>
     </div>
   )
 }

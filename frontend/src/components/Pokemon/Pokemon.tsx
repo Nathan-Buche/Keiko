@@ -1,3 +1,5 @@
+import styles from "./Pokemon.module.css"
+
 export interface PokemonInfo {
   name: string
   id: number
@@ -8,12 +10,12 @@ export interface PokemonInfo {
 export const Pokemon = ({ name, id, height, weight }: PokemonInfo) => {
   console.log("Rendering Pokemon:", name)
   return (
-    <div>
+    <div className={styles.pokemon}>
+      <p>{name}</p>
       <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt={name} />
-      <p>Name: {name}</p>
-      <p>Number: {id}</p>
-      <p>Height: {height}</p>
-      <p>Weight: {weight}</p>
+      <p>Id: {id}</p>
+      <p>Weight: {weight} kg</p>
+      <p>Height: {height} cm</p>
     </div>
   )
 }

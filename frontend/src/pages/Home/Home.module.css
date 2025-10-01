@@ -12,3 +12,13 @@
   border-color: rgb(118, 118, 118);
   border-image: initial;
 }
+
+/* Container for the Pokémon cards */
+.pokemonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the row */
+  gap: 10px; /* Optional: spacing between cards */
+  max-width: 100%;
+  margin-top: 20px;
+}
