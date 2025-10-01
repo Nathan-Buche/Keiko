@@ -39,9 +39,11 @@ export const Home = () => {
         value={pokemonFilterValue}
         placeholder="Cherchez un pokémon"
       />
-      {filterPokemonByName(pokemonList, pokemonFilterValue).map(({ name, id, height, weight }) => (
-        <Pokemon key={id} id={id} name={name} height={height} weight={weight} />
-      ))}
+      <div className={styles.pokemonContainer}>
+        {filterPokemonByName(pokemonList, pokemonFilterValue).map(({ name, id, height, weight }) => (
+          <Pokemon key={id} id={id} name={name} height={height} weight={weight} />
+        ))}
+      </div>
     </div>
   )
 }

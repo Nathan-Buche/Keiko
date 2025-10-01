@@ -26,16 +26,16 @@ describe("<Home />", () => {
 
   it("should display squirtle", async () => {
     render(<Home />)
-    expect(screen.findByText("Name: squirtle")).resolves.toBeVisible()
+    expect(screen.findByText("squirtle")).resolves.toBeVisible()
   })
 
   it("should display ivysaur", async () => {
     render(<Home />)
-    expect(screen.findByText("Name: ivysaur")).resolves.toBeVisible()
+    expect(screen.findByText("ivysaur")).resolves.toBeVisible()
   })
 
   it("should display bulbasaur", async () => {
     render(<Home />)
-    expect(screen.findByText("Name: bulbasaur")).resolves.toBeVisible()
+    expect(screen.findByText("bulbasaur")).resolves.toBeVisible()
   })
 })
