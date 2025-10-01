@@ -10,7 +10,8 @@ function filterPokemonByName(pokeList: PokemonInfo[], name: string) {
 
 async function fetchPokemons() {
   const response = await fetch("http://localhost:8000/pokemons", { headers: { accept: "application/json" } })
-  return response.json()
+  const pokemons = await response.json()
+  return pokemons
 }
 
 export const Home = () => {
