@@ -1,13 +1,7 @@
 import styles from "./Home.module.css"
 import { Pokemon } from "../../components/Pokemon"
 import React from "react"
-
-interface PokemonInfo {
-  id: number
-  name: string
-  height: number
-  weight: number
-}
+import type { PokemonInfo } from "../../components/Pokemon"
 
 function filterPokemonByName(pokeList: PokemonInfo[], filterValue: string) {
   return pokeList.filter(pokemon => pokemon.name.toLowerCase().includes(filterValue.toLowerCase()))

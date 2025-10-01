@@ -1,11 +1,11 @@
-interface Props {
+export interface PokemonInfo {
   name: string
   id: number
   height: number
   weight: number
 }
 
-export const Pokemon = ({ name, id, height, weight }: Props) => {
+export const Pokemon = ({ name, id, height, weight }: PokemonInfo) => {
   console.log("Rendering Pokemon:", name)
   return (
     <div>
