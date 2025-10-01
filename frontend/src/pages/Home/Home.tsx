@@ -3,8 +3,9 @@ import { Pokemon } from "../../components/Pokemon"
 import React from "react"
 import type { PokemonInfo } from "../../components/Pokemon"
 
-function filterPokemonByName(pokeList: PokemonInfo[], filterValue: string) {
-  return pokeList.filter(pokemon => pokemon.name.toLowerCase().includes(filterValue.toLowerCase()))
+function filterPokemonByName(pokeList: PokemonInfo[], name: string) {
+  if (name === "") return pokeList
+  return pokeList.filter(pokemon => pokemon.name.toLowerCase().includes(name.toLowerCase()))
 }
 
 async function fetchPokemons() {
@@ -27,6 +28,7 @@ export const Home = () => {
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilterValue(event.target.value)
   }
+
   return (
     <div className={styles.intro}>
       <div>Pokédex</div>
