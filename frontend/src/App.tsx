@@ -13,7 +13,7 @@ export const App = () => {
           <Route path="/" element={<Navigate to="/pokedex/0" replace />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/pokemon/:id" element={<Pokemon />} />
-          <Route path="/pokedex/:id" element={<Pokedex />} />
+          <Route path="/pokedex/:pageNumber" element={<Pokedex />} />
         </Routes>
       </BrowserRouter>
     </Root>

@@ -5,9 +5,11 @@ import { Loader } from "../../components/Loader/Loader"
 import React from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
-async function fetchPokemonsById(id?: string) {
-  if (id === undefined) throw new Error("No id provided")
-  const response = await fetch(`http://localhost:8000/pokemons?page=${id}`, { headers: { accept: "application/json" } })
+async function fetchPokemonsByPageNumber(pageNumber?: string) {
+  if (pageNumber === undefined) throw new Error("No pageNumber provided")
+  const response = await fetch(`http://localhost:8000/pokemons?page=${pageNumber}`, {
+    headers: { accept: "application/json" },
+  })
   if (!response.ok) throw new Error("Failed to fetch")
   const pokemons = await response.json()
   return pokemons
@@ -19,12 +21,12 @@ export const Pokedex = () => {
   const [isError, setIsError] = React.useState(false)
   const params = useParams()
   const navigate = useNavigate()
-  const currentPage = Number(params.id) || 0
+  const currentPage = Number(params.pageNumber) || 0
 
   React.useEffect(() => {
     const updatePokedexOrError = async () => {
       try {
-        const pokemons = await fetchPokemonsById(params.id)
+        const pokemons = await fetchPokemonsByPageNumber(params.pageNumber)
         updatePokemonList(pokemons)
       } catch (e) {
         setIsError(true)
@@ -34,13 +36,13 @@ export const Pokedex = () => {
     updatePokedexOrError()
   }, [params])
 
-  const handlePrevious = () => {
+  const goToPreviousPage = () => {
     if (currentPage > 0) {
       navigate(`/pokedex/${currentPage - 1}`)
     }
   }
 
-  const handleNext = () => {
+  const goToNextPage = () => {
     navigate(`/pokedex/${currentPage + 1}`)
   }
 
@@ -48,10 +50,10 @@ export const Pokedex = () => {
     <div className={styles.intro}>
       <div>Pokédex</div>
       <div className={styles.navigation}>
-        <button onClick={handlePrevious} className={styles.arrow} disabled={currentPage === 0}>
+        <button onClick={goToPreviousPage} className={styles.arrow} disabled={currentPage === 0}>
           ←
         </button>
-        <button onClick={handleNext} className={styles.arrow}>
+        <button onClick={goToNextPage} className={styles.arrow}>
           →
         </button>
       </div>
