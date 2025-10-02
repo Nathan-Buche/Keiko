@@ -10,3 +10,25 @@
   width: 300px;
   height: 210px;
 }
+
+.pokemonName {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.pokemonRow {
+  display: flex;
+  justify-content: center;
+}
+
+.pokemonRow img {
+  width: 150px;  /* or any size you prefer */
+  height: 150px;
+  object-fit: contain;  /* maintains aspect ratio */
+}
+.pokemonStats {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
