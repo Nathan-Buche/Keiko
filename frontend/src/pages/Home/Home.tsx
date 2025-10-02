@@ -15,8 +15,9 @@ function filterPokemonByName(pokeList: PokemonInfo[], name: string) {
 
 async function fetchPokemons() {
   const response = await fetch("http://localhost:8000/pokemons", { headers: { accept: "application/json" } })
+  if (!response.ok) throw new Error("Failed to fetch")
   const pokemons = await response.json()
-  await wait(2000) // Simulate a slow network
+  await wait(400) // Simulate a slow network
   return pokemons
 }
 
@@ -24,11 +25,16 @@ export const Home = () => {
   const [pokemonFilterValue, setFilterValue] = React.useState("")
   const [pokemonList, updatePokemonList] = React.useState<PokemonInfo[]>([])
   const [isLoading, setIsLoading] = React.useState(true)
+  const [isError, setIsError] = React.useState(false)
 
   React.useEffect(() => {
     const update = async () => {
-      const pokemons = await fetchPokemons()
-      updatePokemonList(pokemons)
+      try {
+        const pokemons = await fetchPokemons()
+        updatePokemonList(pokemons)
+      } catch (e) {
+        setIsError(true)
+      }
       setIsLoading(false)
     }
     update()
@@ -37,9 +43,7 @@ export const Home = () => {
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilterValue(event.target.value)
   }
-
   const pokemonToDisplay = filterPokemonByName(pokemonList, pokemonFilterValue)
-
   return (
     <div className={styles.intro}>
       <div>Pokédex</div>
@@ -52,6 +56,8 @@ export const Home = () => {
       <div className={styles.pokemonContainer}>
         {isLoading ? (
           <Loader />
+        ) : isError ? (
+          <div>Échec du chargement des pokémons</div>
         ) : (
           pokemonToDisplay.map(({ name, id, height, weight }) => (
             <Pokemon key={id} id={id} name={name} height={height} weight={weight} />
