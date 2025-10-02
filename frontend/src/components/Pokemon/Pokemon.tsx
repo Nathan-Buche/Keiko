@@ -8,7 +8,6 @@ export interface PokemonInfo {
 }
 
 export const Pokemon = ({ name, id, height, weight }: PokemonInfo) => {
-  console.log("Rendering Pokemon:", name)
   return (
     <div className={styles.pokemon}>
       <p>{name}</p>
