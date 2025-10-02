@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Root } from "./components/Root"
 
 import { Home } from "./pages/Home"
+import { Pokemon } from "./pages/Pokemon/Pokemon"
 
 export const App = () => {
   return (
@@ -9,6 +10,9 @@ export const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+        </Routes>
+        <Routes>
+          <Route path="/pokemon/:id" element={<Pokemon />} />
         </Routes>
       </BrowserRouter>
     </Root>
