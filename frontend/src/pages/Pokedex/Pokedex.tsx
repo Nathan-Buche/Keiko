@@ -3,7 +3,7 @@ import { Pokemon } from "../../components/Pokemon"
 import type { PokemonInfo } from "../../components/Pokemon"
 import { Loader } from "../../components/Loader/Loader"
 import React from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 async function fetchPokemonsById(id?: string) {
   if (id === undefined) throw new Error("No id provided")
@@ -18,7 +18,9 @@ export const Pokedex = () => {
   const [isLoading, setIsLoading] = React.useState(true)
   const [isError, setIsError] = React.useState(false)
   const params = useParams()
-  console.log(params)
+  const navigate = useNavigate()
+  const currentPage = Number(params.id) || 0
+
   React.useEffect(() => {
     const updatePokedexOrError = async () => {
       try {
@@ -32,9 +34,27 @@ export const Pokedex = () => {
     updatePokedexOrError()
   }, [params])
 
+  const handlePrevious = () => {
+    if (currentPage > 0) {
+      navigate(`/pokedex/${currentPage - 1}`)
+    }
+  }
+
+  const handleNext = () => {
+    navigate(`/pokedex/${currentPage + 1}`)
+  }
+
   return (
     <div className={styles.intro}>
       <div>Pokédex</div>
+      <div className={styles.navigation}>
+        <button onClick={handlePrevious} className={styles.arrow} disabled={currentPage === 0}>
+          ←
+        </button>
+        <button onClick={handleNext} className={styles.arrow}>
+          →
+        </button>
+      </div>
       <div className={styles.pokemonContainer}>
         {isLoading ? (
           <Loader />
