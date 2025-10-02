@@ -25,12 +25,16 @@ export const Home = () => {
   const [pokemonFilterValue, setFilterValue] = React.useState("")
   const [pokemonList, updatePokemonList] = React.useState<PokemonInfo[]>([])
   const [isLoading, setIsLoading] = React.useState(true)
-  const [fetchFailed, setFetchFailed] = React.useState(false)
+  const [isError, setIsError] = React.useState(false)
 
   React.useEffect(() => {
     const update = async () => {
-      const pokemons = await fetchPokemons().catch(() => [setFetchFailed(true)])
-      updatePokemonList(pokemons)
+      try {
+        const pokemons = await fetchPokemons()
+        updatePokemonList(pokemons)
+      } catch (e) {
+        setIsError(true)
+      }
       setIsLoading(false)
     }
     update()
@@ -40,7 +44,6 @@ export const Home = () => {
     setFilterValue(event.target.value)
   }
   const pokemonToDisplay = filterPokemonByName(pokemonList, pokemonFilterValue)
-
   return (
     <div className={styles.intro}>
       <div>Pokédex</div>
@@ -53,7 +56,7 @@ export const Home = () => {
       <div className={styles.pokemonContainer}>
         {isLoading ? (
           <Loader />
-        ) : fetchFailed ? (
+        ) : isError ? (
           <div>Échec du chargement des pokémons</div>
         ) : (
           pokemonToDisplay.map(({ name, id, height, weight }) => (
