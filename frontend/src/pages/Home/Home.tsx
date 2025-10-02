@@ -28,7 +28,7 @@ export const Home = () => {
   const [isError, setIsError] = React.useState(false)
 
   React.useEffect(() => {
-    const update = async () => {
+    const updatePokemonListOrError = async () => {
       try {
         const pokemons = await fetchPokemons()
         updatePokemonList(pokemons)
@@ -37,7 +37,7 @@ export const Home = () => {
       }
       setIsLoading(false)
     }
-    update()
+    updatePokemonListOrError()
   }, [])
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

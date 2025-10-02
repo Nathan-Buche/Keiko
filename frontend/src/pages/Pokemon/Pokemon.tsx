@@ -19,7 +19,7 @@ export const Pokemon = () => {
   const params = useParams()
 
   React.useEffect(() => {
-    const update = async () => {
+    const updatePokemonOrError = async () => {
       try {
         const pokemon = await fetchPokemonById(params.id || "")
         updatePokemon(pokemon)
@@ -28,7 +28,7 @@ export const Pokemon = () => {
       }
       setIsLoading(false)
     }
-    update()
+    updatePokemonOrError()
   }, [params])
 
   const isPokemonValid = (pokemon?: PokemonInfo): pokemon is PokemonInfo => {
