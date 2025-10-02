@@ -15,38 +15,43 @@ async function fetchPokemonById(id: string) {
 export const Pokemon = () => {
   const [pokemon, updatePokemon] = React.useState<PokemonInfo>()
   const [isLoading, setIsLoading] = React.useState(true)
-  const [fetchFailed, setFetchFailed] = React.useState(false)
+  const [isError, setIsError] = React.useState(false)
   const params = useParams()
-
-  console.log(params)
 
   React.useEffect(() => {
     const update = async () => {
-      console.log("Fetching pokemon", params.id)
-      const pokemon = await fetchPokemonById(params.id || "").catch(() => [setFetchFailed(true)])
-      updatePokemon(pokemon)
+      try {
+        const pokemon = await fetchPokemonById(params.id || "")
+        updatePokemon(pokemon)
+      } catch (e) {
+        setIsError(true)
+      }
       setIsLoading(false)
     }
     update()
   }, [params])
 
+  const isPokemonValid = (pokemon?: PokemonInfo): pokemon is PokemonInfo => {
+    return pokemon !== undefined
+  }
+
+  const showError = isError || !isPokemonValid(pokemon)
+
   return (
-    <div className={styles.intro}>
-      <div className={styles.pokemonDetailed}>
-        {isLoading ? (
-          <Loader />
-        ) : fetchFailed || !pokemon ? (
-          <div>Échec du chargement du pokémon</div>
-        ) : (
-          <PokemonDetailed
-            key={pokemon.id}
-            id={pokemon.id}
-            name={pokemon.name}
-            height={pokemon.height}
-            weight={pokemon.weight}
-          />
-        )}
-      </div>
+    <div className={styles.pokemonContainer}>
+      {isLoading ? (
+        <Loader />
+      ) : showError ? (
+        <div>Échec du chargement du pokémon</div>
+      ) : (
+        <PokemonDetailed
+          key={pokemon.id}
+          id={pokemon.id}
+          name={pokemon.name}
+          height={pokemon.height}
+          weight={pokemon.weight}
+        />
+      )}
     </div>
   )
 }
