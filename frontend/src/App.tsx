@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Root } from "./components/Root"
 
 import { Home } from "./pages/Home"
-import { Pokemon } from "./pages/Pokemon/Pokemon"
+import { Pokemon } from "./pages/Pokemon"
 
 export const App = () => {
   return (
