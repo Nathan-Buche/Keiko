@@ -3,7 +3,7 @@ import { Loader } from "../../components/Loader/Loader"
 import React from "react"
 import { useParams } from "react-router-dom"
 import type { PokemonInfo } from "../../components/Pokemon"
-import { PokemonDetailed } from "../../components/Pokemon"
+import { AnimatedPokemonDetailed } from "../../components/Pokemon"
 
 async function fetchPokemonById(id: string) {
   const response = await fetch(`http://localhost:8000/pokemon/${id}`, { headers: { accept: "application/json" } })
@@ -44,7 +44,7 @@ export const Pokemon = () => {
       ) : showError ? (
         <div>Échec du chargement du pokémon</div>
       ) : (
-        <PokemonDetailed
+        <AnimatedPokemonDetailed
           key={pokemon.id}
           id={pokemon.id}
           name={pokemon.name}
