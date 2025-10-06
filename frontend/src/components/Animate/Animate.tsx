@@ -8,7 +8,7 @@ export const Animate = <P extends object>(BaseComponent: React.ComponentType<P>)
     return (
       <div
         id="AnimatedComponent"
-        className={`${styles.wrapper} ${isAnimating ? styles.tadaAnimation : ""}`}
+        className={`${isAnimating ? styles.tadaAnimation : ""}`}
         onMouseEnter={() => {
           console.log("mouseEnter")
           setIsAnimating(true)
