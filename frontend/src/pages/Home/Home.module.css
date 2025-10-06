@@ -14,7 +14,7 @@
 }
 
 /* Container for the Pokémon cards */
-.pokemonContainer {
+.pokemonHomeContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center; /* Center the row */

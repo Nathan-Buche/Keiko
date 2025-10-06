@@ -57,7 +57,7 @@ export const Pokedex = () => {
           →
         </button>
       </div>
-      <div className={styles.pokemonContainer}>
+      <div className={styles.pokemonHomeContainer}>
         {isLoading ? (
           <Loader />
         ) : isError ? (
