@@ -53,7 +53,7 @@ export const Home = () => {
         value={pokemonFilterValue}
         placeholder="Cherchez un pokémon"
       />
-      <div className={styles.pokemonContainer}>
+      <div className={styles.pokemonHomeContainer}>
         {isLoading ? (
           <Loader />
         ) : isError ? (

@@ -1,3 +1,3 @@
 export * from "./PokemonCard"
-export * from "./PokemonDetails"
+export * from "./PokemonDetailed"
 export type { PokemonInfo } from "./PokemonInterface"
