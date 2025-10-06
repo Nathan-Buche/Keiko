@@ -1,3 +1,4 @@
+import { Animate } from "../Animate"
 import styles from "./Pokemon.module.css"
 import type { PokemonInfo } from "./PokemonInterface"
 
@@ -30,3 +31,5 @@ export const PokemonDetailed = ({ name, id, height, weight }: PokemonInfo) => {
     </div>
   )
 }
+
+export const AnimatedPokemonDetailed = Animate(PokemonDetailed)
